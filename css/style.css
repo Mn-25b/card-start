@@ -1,15 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 .wrapper {
     padding-top: 60px;
     display: flex;
     flex-wrap: wrap;
     position: absolute;
     width: 100%;
-    min-height: 100%;
     left: 0;
     top: 0;
     background-color: #d5d5d5;
     display: flex;
-    justify-content: start;
+    justify-content: center;
+    align-items: center;
+}
+.contaener {
+    width: 1440px;
+    display: flex;
+    flex-wrap: wrap;
+
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 .card {
@@ -19,7 +28,7 @@
     margin-bottom: 42px;
     position: relative;
     perspective: 750px;
-    border: 1px solid #fff;
+    border-radius: 14px;
 }
 .front,
 .back {
@@ -29,28 +38,93 @@
     left: 0;
     top: 0;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    box-shadow: -4px -4px 10px rgba(0, 0, 0, 0.25), 4px 4px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    background-image: url(../img/bg/3.jpg);
+    background-size: cover;
 
     transition: 1s;
     backface-visibility: hidden;
-    border: 1px solid #fff;
-
-    
-    background-size: cover;
-}
-.imgfon {
-    width: 100%;
-    height: 100%;
-    background-image: url(../img/bg/3.jpg);
-    background-size: cover;
 }
 .back {
+    padding: 6px 6px 14px 10px;
     color: #fff;
-    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../img/bg/3.jpg');
-    /* background-image: url('../img/bg/3.jpg');;
-    filter: brightness(40%); */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/bg/3.jpg");
+
     transform: rotateY(180deg);
-    border: 1px solid #fff;
+}
+
+.card-name {
+    margin: 16px;
+    font-family: Roboto;
+    font-weight: 300;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.card-back-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    margin-bottom: 6px;
+}
+.name-after {
+    margin-left: 2px;
+    margin-bottom: 2px;
+    font-family: Roboto;
+    font-size: 16px;
+    letter-spacing: 0.065em;
+    opacity: 0.7;
+}
+.burger-menu {
+    
+}
+.burger-menu img{
+    cursor: pointer;
+}
+.card-back-content {
+
+}
+.back-text{
+    font-family: Roboto;
+    font-weight: 300;
+    font-size: 18px;
+
+    height: 280px;
+    overflow: hidden;
+}
+.card-menu-open {
+}
+
+
+
+#burger-menu-share{
+    position: relative;
+}
+.menu-share{
+    width: 146px;
+    height: 46px;
+
+    position: absolute;
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+
+    padding-top: 8px;
+    margin-left: -60px;
+    background-image: url('../img/ico/Group\ 35.svg');
+}
+#burger-menu-share:hover .menu-share{
+    display: flex;
+}
+
+
+.burger-menu-active{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.display-none{
+    display: none
 }
