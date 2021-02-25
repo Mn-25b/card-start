@@ -1,5 +1,6 @@
 'use strict'
 let wrapper = document.querySelector('.wrapper')
+let fontSize = 18;
 wrapper.onclick = function (event) {
 
     let card = event.target.closest('.card');
@@ -13,28 +14,37 @@ wrapper.onclick = function (event) {
         closeAllCard()
         return
     }
-
+    let front = card.children[0];
+    let back = card.children[1];
     //бургер меню 
     if (event.target.closest('.toggle-burger-menu')) {
         toggleBurgerMenu(card)
+        gop(card, back)
+
     } else if (!event.target.closest('.burger-menu')) {
         closeBurgerMenu(card)
-    } else if (event.target.closest('#add-and-remove-card')){
+    } else if (event.target.closest('#add-and-remove-card')) {
         const addCard = event.target.closest('#add-and-remove-card').children[0];
         const removeCard = event.target.closest('#add-and-remove-card').children[1];
         //добавление и удаление карточек из избранных
         if (addCard.className === 'display-none') {
             addCard.classList.toggle('display-none')
             removeCard.classList.toggle('display-none')
-        }else if (removeCard.className === 'display-none') {
+        } else if (removeCard.className === 'display-none') {
             addCard.classList.toggle('display-none')
             removeCard.classList.toggle('display-none')
         }
     }
 
+
+
+
+
+
+
+
     //взятие у этой карточки 2 стороны
-    let front = card.children[0];
-    let back = card.children[1];
+
 
     // закрытие карточек возможно бесполезная
     // if (card.classList.contains('card-active')) closeAllCard();
@@ -65,50 +75,50 @@ function closeAllCard() {
 //создание карточек
 const conteiner = document.querySelector('.contaener')
 let cardContent = `
-    <div class="card">
-        <div class="front">
-            <h3 class="card-name">Работай быстро и продуктивно</h3>
-        </div>
-        <div class="back">
-            <div class="card-back-header">
-                <div class="name-after">Автор: <span>Тимофей Бурдаков</span></div>
-                <div class="burger-menu">
-                    <div class="burger-ico display-none" id="add-and-remove-card">
-                        <img id="add-card" src="img/menu/chek.svg" alt="+">
-                        <img id="remove-card" class="display-none" src="img/menu/exit.svg" alt="X">
-                    </div>
-                    <div class="burger-ico display-none" id="burger-menu-share">
-                        <img src="img/menu/share.svg" alt="">
-                        <div class="menu-share">
-                            <a href="#"><img src="img/ico/facebook.svg" alt=""></a>
-                            <a href="#"><img src="img/ico/twitter.svg" alt=""></a>
-                            <a href="#"><img src="img/ico/vk.svg" alt=""></a>
-                            <a href="#"><img src="img/ico/instagram.svg" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="burger-ico display-none"><img src="img/menu/plus.svg" alt=""></div>
-                    <div class="burger-ico display-none"><img src="img/menu/minus.svg" alt=""></div>
-                    <div class="toggle-burger-menu"><img src="img/menu/menu.svg" alt=""></div>
+<div class="card">
+<div class="front">
+    <h3 class="card-name">Работай быстро и продуктивно</h3>
+</div>
+<div class="back">
+    <div class="card-back-header">
+        <div class="name-after">Автор: <span>Тимофей Бурдаков</span></div>
+        <div class="burger-menu">
+            <div class="burger-ico display-none" id="add-and-remove-card">
+                <img id="add-card" src="img/menu/chek.svg" alt="+">
+                <img id="remove-card" class="display-none" src="img/menu/exit.svg" alt="X">
+            </div>
+            <div class="burger-ico display-none" id="burger-menu-share">
+                <img src="img/menu/share.svg" alt="">
+                <div class="menu-share">
+                    <a href="#"><img src="img/ico/facebook.svg" alt=""></a>
+                    <a href="#"><img src="img/ico/twitter.svg" alt=""></a>
+                    <a href="#"><img src="img/ico/vk.svg" alt=""></a>
+                    <a href="#"><img src="img/ico/instagram.svg" alt=""></a>
                 </div>
             </div>
-            <div class="card-back-content">
-                <div class="back-text">
-                    Далеко-далеко за словесными горами в стране гласных и согласных живут
-                    рыбные тексты. Проектах грамматики над, коварных реторический ведущими переписали последний,
-                    домах своего живет свой она рукописи языком семантика, наш собрал прямо все.
-                    Одна которое алфавит он рукопись свою, но, решила строчка даже буквоград, прямо продолжил
-                    букв образ рукописи свой свое заманивший щеке от всех скатился? Обеспечивает запятой он
-                    текстов если, заманивший агентство послушавшись.
-                    Безопасную маленький, единственное одна продолжил силуэт коварный снова языком составитель
-                    пунктуация приставка использовало родного власти переписывается раз бросил которое заглавных
-                    послушавшись. Запятой, напоивший города рукописи курсивных грустный единственное ipsum
-                    силуэт!
-
-                </div>
-                <div><a href="#" class="card-menu-open">ещё</a></div>
-            </div>
+            <div class="burger-ico display-none" id="plus-text"><img src="img/menu/plus.svg" alt=""></div>
+            <div class="burger-ico display-none" id="minus-text"><img src="img/menu/minus.svg" alt=""></div>
+            <div class="toggle-burger-menu"><img src="img/menu/menu.svg" alt=""></div>
         </div>
     </div>
+    <div class="card-back-content">
+        <div class="back-text">
+            Далеко-далеко за словесными горами в стране гласных и согласных живут
+            рыбные тексты. Проектах грамматики над, коварных реторический ведущими переписали последний,
+            домах своего живет свой она рукописи языком семантика, наш собрал прямо все.
+            Одна которое алфавит он рукопись свою, но, решила строчка даже буквоград, прямо продолжил
+            букв образ рукописи свой свое заманивший щеке от всех скатился? Обеспечивает запятой он
+            текстов если, заманивший агентство послушавшись.
+            Безопасную маленький, единственное одна продолжил силуэт коварный снова языком составитель
+            пунктуация приставка использовало родного власти переписывается раз бросил которое заглавных
+            послушавшись. Запятой, напоивший города рукописи курсивных грустный единственное ipsum
+            силуэт!
+
+        </div>
+        <div><a href="#" class="card-menu-open">ещё</a></div>
+    </div>
+</div>
+</div>
     `
 
 for (let i = 1; i <= 10; i++) {
@@ -139,5 +149,35 @@ function closeBurgerMenu(e) {
 
     nameAfter.classList.remove('display-none');
     burgerMenu.classList.remove('burger-menu-active');
+
+}
+
+function gop(card, back) {
+    let btnMinus = back.querySelector('#minus-text');
+    let btnPlus = back.querySelector('#plus-text');
+    let text = document.querySelectorAll('.back-text');
+    btnMinus.onclick = function () {
+        if (fontSize === 12) {
+            return
+        } else {
+            --fontSize;
+            [].forEach.call(document.querySelectorAll('.back-text'), function (e) {
+                e.style.fontSize = `${fontSize}px`
+            });
+        }
+
+
+    }
+    btnPlus.onclick = function () {
+        if (fontSize === 32) {
+            return
+        }
+        else {
+            ++fontSize;
+            [].forEach.call(document.querySelectorAll('.back-text'), function (e) {
+                e.style.fontSize = `${fontSize}px`
+            });
+        }
+    }
 
 }
