@@ -13,22 +13,22 @@
     align-items: center;
 }
 .contaener {
-    width: 1440px;
+    width: 1140px;
     display: flex;
     flex-wrap: wrap;
 
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 .card {
     width: 307px;
     height: 374px;
-    margin-left: 86px;
     margin-bottom: 42px;
     position: relative;
     perspective: 750px;
     border-radius: 14px;
+    
 }
 .front,
 .back {

@@ -1,79 +1,13 @@
 'use strict'
-let wrapper = document.querySelector('.wrapper')
-let fontSize = 18;
-wrapper.onclick = function (event) {
 
-    let card = event.target.closest('.card');
+const wrapper = document.querySelector('.wrapper')
+const conteiner = document.querySelector('.contaener')
 
-    //проверка на клик если !card то закрыть все карточки
-    if (!card) {
-        closeAllCard()
-        return
-    }
-    if (!wrapper.contains(card)) {
-        closeAllCard()
-        return
-    }
-    let front = card.children[0];
-    let back = card.children[1];
-    //бургер меню 
-    if (event.target.closest('.toggle-burger-menu')) {
-        toggleBurgerMenu(card)
-        gop(card, back)
-
-    } else if (!event.target.closest('.burger-menu')) {
-        closeBurgerMenu(card)
-    } else if (event.target.closest('#add-and-remove-card')) {
-        const addCard = event.target.closest('#add-and-remove-card').children[0];
-        const removeCard = event.target.closest('#add-and-remove-card').children[1];
-        //добавление и удаление карточек из избранных
-        if (addCard.className === 'display-none') {
-            addCard.classList.toggle('display-none')
-            removeCard.classList.toggle('display-none')
-        } else if (removeCard.className === 'display-none') {
-            addCard.classList.toggle('display-none')
-            removeCard.classList.toggle('display-none')
-        }
-    }
+let fontSize = 18
 
 
-
-
-
-
-
-
-    //взятие у этой карточки 2 стороны
-
-
-    // закрытие карточек возможно бесполезная
-    // if (card.classList.contains('card-active')) closeAllCard();
-
-    // открытие карточки при том закрытие остальных карточек
-    if (!card.classList.contains('card-active')) {
-        closeAllCard()
-        openMenu(front, back)
-        card.classList.add('card-active')
-    }
-};
-
-//открывает карточку
-function openMenu(front, back) {
-    front.style.transform = 'rotateY(180deg)'
-    back.style.transform = 'rotateY(360deg)'
-}
-
-// закрывает карточки
-function closeAllCard() {
-    [].forEach.call(document.querySelectorAll('.card'), function (e) {
-        e.classList.remove('card-active')
-        e.children[0].style.transform = 'rotateY(0deg)'
-        e.children[1].style.transform = 'rotateY(180deg)'
-    });
-}
 
 //создание карточек
-const conteiner = document.querySelector('.contaener')
 let cardContent = `
 <div class="card">
 <div class="front">
@@ -120,12 +54,91 @@ let cardContent = `
 </div>
 </div>
     `
-
-for (let i = 1; i <= 10; i++) {
+for (let i = 1; i <= 11; i++) {
     conteiner.insertAdjacentHTML('beforeend', cardContent)
 }
 
-// открытие и закрытие бургера при клике на бургер меню
+//локика карточек
+wrapper.onclick = function (event) {
+
+    let card = event.target.closest('.card');
+
+    //проверка на клик если !card то закрыть все карточки
+    if (!card) {
+        closeAllCard()
+        return
+    }
+    if (!wrapper.contains(card)) {
+        closeAllCard()
+        return
+    }
+
+    //взятие у этой карточки 2 стороны
+    let front = card.children[0];
+    let back = card.children[1];
+
+    // открытие карточки при том закрытие остальных карточек
+    if (!card.classList.contains('card-active')) {
+        closeAllCard()
+        openMenu(front, back)
+        card.classList.add('card-active')
+    }
+
+    //бургер меню
+    burgerMenuCard(card, back)
+};
+
+/*/////////////////////////////////////////////////////////////////////////////*/
+
+//открывает карточку
+function openMenu(front, back) {
+    front.style.transform = 'rotateY(180deg)'
+    back.style.transform = 'rotateY(360deg)'
+}
+
+// закрывает карточки
+function closeAllCard() {
+    [].forEach.call(document.querySelectorAll('.card'), function (e) {
+        e.classList.remove('card-active')
+        e.children[0].style.transform = 'rotateY(0deg)'
+        e.children[1].style.transform = 'rotateY(180deg)'
+    });
+}
+
+/*/////////////////////////////////////////////////////////////////////////////*/
+
+//бургер меню 
+function burgerMenuCard(card, back){
+    
+    //открытие и закритие меню при нажатии на бургер
+    if (event.target.closest('.toggle-burger-menu')) {
+        toggleBurgerMenu(card)
+        
+    // закритие меню при нажатии всне его
+    } else if (!event.target.closest('.burger-menu')) {
+        closeBurgerMenu(card)
+
+    //при клике добовление и удаление из избранного карточки
+    } else if (event.target.closest('#add-and-remove-card')) {
+        const addCard = event.target.closest('#add-and-remove-card').children[0];
+        const removeCard = event.target.closest('#add-and-remove-card').children[1];
+        //добавление и удаление карточек из избранных
+        if (addCard.className === 'display-none') {
+            addCard.classList.toggle('display-none')
+            removeCard.classList.toggle('display-none')
+        } else if (removeCard.className === 'display-none') {
+            addCard.classList.toggle('display-none')
+            removeCard.classList.toggle('display-none')
+        }
+    }
+
+    //увеличение текста
+    increaseFontSize(back)
+}
+
+/*/////////////////////////////////////////////////////////////////////////////*/
+
+// открытие и закрытие бургера при клике на бургер
 function toggleBurgerMenu(e) {
     const nameAfter = e.querySelector('.name-after');
     const burgerMenu = e.querySelector('.burger-menu');
@@ -138,7 +151,7 @@ function toggleBurgerMenu(e) {
     burgerMenu.classList.toggle('burger-menu-active');
 
 }
-// закрытие бургера 
+// закрытие бургера при клике вне его
 function closeBurgerMenu(e) {
     const nameAfter = e.querySelector('.name-after');
     const burgerMenu = e.querySelector('.burger-menu');
@@ -152,10 +165,10 @@ function closeBurgerMenu(e) {
 
 }
 
-function gop(card, back) {
+// увеличение и уменьшении размера текста
+function increaseFontSize(back) {
     let btnMinus = back.querySelector('#minus-text');
     let btnPlus = back.querySelector('#plus-text');
-    let text = document.querySelectorAll('.back-text');
     btnMinus.onclick = function () {
         if (fontSize === 12) {
             return
